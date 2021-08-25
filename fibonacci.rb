@@ -2,10 +2,11 @@
 
 require 'benchmark'
 
-def fibonacci(num)
-  return 1 if num <= 1
+def fibonacci(num, memo = {})
+  return memo[num] if memo.include?(num)
+  return 1 if num <= 2
 
-  fibonacci(num - 1) + fibonacci(num - 2)
+  memo[num] = fibonacci(num - 1, memo) + fibonacci(num - 2, memo)
 end
 
-puts(Benchmark.measure { fibonacci(40) })
+puts(Benchmark.measure { fibonacci(50) })
