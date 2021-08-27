@@ -5,12 +5,12 @@
 # Returns the length of the longest increasing subsequence
 def lis(array)
   helper = Array.new(array.length, 1)
-  (1..array.length - 1).each do |i|
-    (0..i).each do |j|
-      helper[i] = [helper[j] + 1, helper[i]].max if array[j] < array[i]
+  (1..array.length - 1).each do |array_index|
+    (0..array_index).each do |inner_value|
+      if array[inner_value] < array[array_index]
+        helper[array_index] = [helper[inner_value] + 1, helper[array_index]].max
+      end
     end
   end
   helper.max
 end
-
-puts lis([3, 1, 8, 2, 5])
